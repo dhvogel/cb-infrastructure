@@ -9,7 +9,7 @@ resource "aws_kms_key" "cb_secrets_bucket_sse_key" {
 
 resource "aws_s3_bucket" "cb_secrets_bucket" {
   bucket = "cb-secrets-bucket-042618"
-  policy = "${file("s3_secrets_bucket_policy.json")}"
+  acl    = "private"
 
   server_side_encryption_configuration {
     rule {
