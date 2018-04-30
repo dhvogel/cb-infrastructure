@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = "us-east-1"
+  region = "us-east-1"
 }
 
 resource "aws_kms_key" "cb_secrets_bucket_sse_key" {
@@ -24,5 +24,4 @@ resource "aws_s3_bucket" "cb_secrets_bucket" {
     target_bucket = "cb-logging-bucket-042618"
     target_prefix = "log/"
   }
-
 }
