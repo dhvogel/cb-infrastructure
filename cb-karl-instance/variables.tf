@@ -42,3 +42,8 @@ variable "tag_name" {
   description = "Name tag on instance"
   default     = "cb-karl"
 }
+
+variable "iam_instance_profile" {
+  description = "IAM Instance Profile"
+  default = "arn:aws:iam::306064677421:instance-profile/s3AdminAccess"
+}

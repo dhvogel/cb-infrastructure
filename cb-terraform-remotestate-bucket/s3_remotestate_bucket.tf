@@ -2,8 +2,8 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "cb_secrets_bucket" {
-  bucket = "cb-secrets-bucket-042618"
+resource "aws_s3_bucket" "cb_remotestate_bucket" {
+  bucket = "cb-remotestate-bucket-043018"
   acl    = "private"
 
   server_side_encryption_configuration {
@@ -16,6 +16,6 @@ resource "aws_s3_bucket" "cb_secrets_bucket" {
 
   logging {
     target_bucket = "cb-logging-bucket-042618"
-    target_prefix = "log/secrets"
+    target_prefix = "log/remotestate"
   }
 }

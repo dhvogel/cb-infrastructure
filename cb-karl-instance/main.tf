@@ -2,6 +2,14 @@ provider "aws" {
   region = "${var.aws_region}"
 }
 
+terraform {
+  backend "s3" {
+    bucket = "cb-remotestate-bucket-043018"
+    key    = "cb-karl-remotestate.tfstate"
+    region = "us-east-1"
+  }
+}
+
 resource "aws_security_group" "cfcorp_web_sg" {
   name        = "${var.sg_name}"
   description = "${var.sg_description}"
@@ -47,6 +55,7 @@ resource "aws_instance" "cfcorp_web_instance" {
   ami           = "${var.ami_id}"
   instance_type = "${var.instance_type}"
   key_name      = "${var.key_name}"
+  iam_instance_profile = "${var.iam_instance_profile}"
 
   security_groups = [
     "${aws_security_group.cfcorp_web_sg.name}",
@@ -74,7 +83,7 @@ resource "aws_elb" "cb-karl-web-elb" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 3
-    target              = "HTTP:80/"
+    target              = "HTTP:80/health"
     interval            = 30
   }
 
